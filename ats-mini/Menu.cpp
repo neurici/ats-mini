@@ -63,7 +63,8 @@ Band bands[] =
   {"10M",  SW_BAND_TYPE, USB, 28000, 29700, 28500, 5, 4, 0, 0},
   // https://www.hfunderground.com/wiki/CB
   // Also see MIN_CB_FREQUENCY and MAX_CB_FREQUENCY
-  {"CB",   SW_BAND_TYPE, AM,  25000, 28000, 27135, 0, 4, 0, 0},
+  {"CB",   SW_BAND_TYPE, AM,  25000, 28000, 27225, 0, 4, 0, 0},
+  {"CB AUTO",   SW_BAND_TYPE, FM,  25000, 28000, 27225, 0, 4, 0, 0},
 };
 
 int getTotalBands() { return(ITEM_COUNT(bands)); }
@@ -91,7 +92,7 @@ int8_t menuIdx = MENU_VOLUME;
 
 static const char *menu[] =
 {
-  "Mod",
+  "Modulatie",
   "Banda",
   "Volum",
   "Pas",
@@ -132,7 +133,7 @@ int8_t settingsIdx = MENU_BRIGHTNESS;
 
 static const char *settings[] =
 {
-  "Luminozitate",
+  "Iluminare",
   "Calibrare",
   "RDS",
   "Offset UTC",
@@ -141,8 +142,8 @@ static const char *settings[] =
   "Apect UI",
   "Marire Meniu",
   "Dir. Scroll",
-  "Somn",
-  "Mod Somn",
+  "Economizor",
+  "Mod ECO",
   "Incarca EiBi",
   "Serial USB",
   "Bluetooth",
