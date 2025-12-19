@@ -538,7 +538,7 @@ static const String webRadioPage()
   }
 
   return webPage(
-"<H1>ATS-Mini Pocket Receiver</H1>"
+"<H1>ATS-Mini Pocket Receiver - Gersiu Edition</H1>"
 "<P ALIGN='CENTER'>"
   "<A HREF='/memory'>Memory</A>&nbsp;|&nbsp;<A HREF='/config'>Config</A>"
 "</P>"
