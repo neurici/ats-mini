@@ -92,14 +92,14 @@ int8_t menuIdx = MENU_VOLUME;
 static const char *menu[] =
 {
   "Mod",
-  "Bandă",
+  "Banda",
   "Volum",
   "Pas",
   "Cautare",
   "Scanare",
   "Memorie",
   "Squelch",
-  "L Bandă",
+  "L Banda",
   "AGC/ATTN",
   "AVC",
   "SoftMute",
@@ -143,7 +143,7 @@ static const char *settings[] =
   "Dir. Scroll",
   "Somn",
   "Mod Somn",
-  "Incarcare EiBi",
+  "Incarca EiBi",
   "Serial USB",
   "Bluetooth",
   "Wi-Fi",
@@ -524,7 +524,7 @@ static void clickScan(bool shortPress)
     clearStationInfo();
     rssi = snr = 0;
     drawScreen();
-    drawMessage("Scanning...");
+    drawMessage("Scanare...");
     scanRun(currentFrequency, 10);
   }
   else currentCmd = CMD_NONE;
