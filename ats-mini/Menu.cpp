@@ -28,7 +28,7 @@ Band bands[] =
 {
   {"VHF",  FM_BAND_TYPE, FM,   6400, 10800, 10390, 2, 0, 0, 0},
   // All band. LW, MW and SW (from 150kHz to 30MHz)
-  {"ALL",  SW_BAND_TYPE, AM,    150, 30000, 15000, 1, 4, 0, 0},
+  {"TOT",  SW_BAND_TYPE, AM,    150, 30000, 15000, 1, 4, 0, 0},
   {"11M",  SW_BAND_TYPE, AM,  25600, 26100, 25850, 1, 4, 0, 0},
   {"13M",  SW_BAND_TYPE, AM,  21500, 21900, 21650, 1, 4, 0, 0},
   {"15M",  SW_BAND_TYPE, AM,  18900, 19100, 18950, 1, 4, 0, 0},
@@ -91,19 +91,19 @@ int8_t menuIdx = MENU_VOLUME;
 
 static const char *menu[] =
 {
-  "Mode",
-  "Band",
-  "Volume",
-  "Step",
+  "Mod",
+  "Banda",
+  "Volum",
+  "Pas",
   "Seek",
-  "Scan",
-  "Memory",
+  "Scanare",
+  "Memorie",
   "Squelch",
   "Bandwidth",
   "AGC/ATTN",
   "AVC",
   "SoftMute",
-  "Settings",
+  "Setari",
 };
 
 //
@@ -132,22 +132,22 @@ int8_t settingsIdx = MENU_BRIGHTNESS;
 
 static const char *settings[] =
 {
-  "Brightness",
-  "Calibration",
+  "Luminozitate",
+  "Calibrare",
   "RDS",
-  "UTC Offset",
-  "FM Region",
-  "Theme",
-  "UI Layout",
-  "Zoom Menu",
-  "Scroll Dir.",
-  "Sleep",
-  "Sleep Mode",
-  "Load EiBi",
-  "USB Serial",
+  "Offset UTC",
+  "Regiune FM",
+  "Tema",
+  "Apect UI",
+  "Marire MEniu",
+  "Directie Scroll",
+  "Somn",
+  "Mod Somn",
+  "Incarcare EiBi",
+  "Serial USB",
   "Bluetooth",
   "Wi-Fi",
-  "About",
+  "Despre",
 };
 
 //
@@ -224,7 +224,7 @@ const UTCOffset utcOffsets[] =
   { -1 * 4, "UTC-1", "Nuuk" },
   {  0 * 4, "UTC+0", "Reykjavik" },
   {  1 * 4, "UTC+1", "London" },
-  {  2 * 4, "UTC+2", "Berlin" },
+  {  2 * 4, "UTC+2", "Bucharest" },
   {  3 * 4, "UTC+3", "Moscow" },
   {  4 * 4, "UTC+4", "Yerevan" },
   {  5 * 4, "UTC+5", "Astana" },
