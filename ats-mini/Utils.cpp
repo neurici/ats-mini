@@ -74,7 +74,7 @@ void loadSSB(uint8_t bandwidth, bool draw)
 {
   if(!ssbLoaded)
   {
-    if(draw) drawMessage("Loading SSB");
+    if(draw) drawMessage("Trec pe SSB");
     rx.loadPatch(ssb_patch_content, sizeof(ssb_patch_content), bandwidth);
     ssbLoaded = true;
   }
