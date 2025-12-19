@@ -7,9 +7,9 @@
 
 #define RECEIVER_DESC  "ESP32-SI4732 Receiver"
 #define RECEIVER_NAME  "ATS-Mini"
-#define FIRMWARE_URL   "https://github.com/esp32-si4732/ats-mini"
-#define MANUAL_URL     "https://esp32-si4732.github.io/ats-mini/manual.html"
-#define AUTHORS_LINE1  "Authors: PU2CLR (Ricardo Caratti),"
+#define FIRMWARE_URL   "https://github.com/neurici/ats-mini"
+#define MANUAL_URL     "https://github.com/neurici/ats-mini/manual.html"
+#define AUTHORS_LINE1  "Authors: GERSIU (COGIAN SERGIU),"
 #define AUTHORS_LINE2  "Volos Projects, Ralph Xavier, Sunnygold,"
 #define AUTHORS_LINE3  "Goshante, G8PTN (Dave), R9UCL (Max Arnold),"
 #define AUTHORS_LINE4  "Marat Fayzullin"
