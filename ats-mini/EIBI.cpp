@@ -387,19 +387,19 @@ static bool eibiParseLine(const char *line, StationSchedule &entry)
 
 bool eibiLoadSchedule()
 {
-  static const char *eibiMessage = "Loading EiBi Schedule";
+  static const char *eibiMessage = "Incarc programul EiBi";
   HTTPClient http;
 
   // Need to be connected to the network
   if(getWiFiStatus() < 2) return(false);
 
-  drawScreen(eibiMessage, "Connecting...");
+  drawScreen(eibiMessage, "Conectare...");
 
   // Open HTTP connection to EiBi site
   http.begin(EIBI_URL);
   if(http.GET() != HTTP_CODE_OK)
   {
-    drawScreen(eibiMessage, "Failed connecting to EiBi!");
+    drawScreen(eibiMessage, "Conectarea la EiBi a esuat!");
     http.end();
     return(false);
   }
@@ -408,7 +408,7 @@ bool eibiLoadSchedule()
   fs::File file = LittleFS.open(TEMP_PATH, "wb");
   if(!file)
   {
-    drawScreen(eibiMessage, "Failed opening local storage!");
+    drawScreen(eibiMessage, "Eroare accesare stocare locala!");
     http.end();
     return(false);
   }
@@ -468,7 +468,7 @@ bool eibiLoadSchedule()
             if(!(lineCnt & 31))
             {
               char statusMessage[64];
-              sprintf(statusMessage, "... %d bytes, %d entries ...", byteCnt, lineCnt);
+              sprintf(statusMessage, "... %d bytes, %d intrari ...", byteCnt, lineCnt);
               drawScreen(eibiMessage, statusMessage);
             }
           }
@@ -491,6 +491,6 @@ bool eibiLoadSchedule()
 
   // Success
   identifyFrequency(currentFrequency + currentBFO / 1000);
-  drawScreen(eibiMessage, "DONE!");
+  drawScreen(eibiMessage, "FINALIZAT!");
   return(true);
 }
