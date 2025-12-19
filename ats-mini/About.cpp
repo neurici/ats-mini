@@ -47,8 +47,8 @@ void drawAboutHelp(uint8_t arrow)
   spr.drawString("to continue.", 130, 70 + 16 * 2, 2);
   if(arrow)
   {
-    spr.drawString("Rotate the encoder to see", 130, 70 + 16 * 3, 2);
-    spr.drawString("the next page.", 130, 70 + 16 * 4, 2);
+    spr.drawString("ATS MINI - GERSIU EDITION", 130, 70 + 16 * 3, 2);
+    spr.drawString("COGIAN SERGIU", 130, 70 + 16 * 4, 2);
   }
   else
   {
