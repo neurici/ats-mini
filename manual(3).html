@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="ro" data-lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ATS MINI - Manual (RO/EN)</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --card: #101826;
+      --text: #e6edf3;
+      --muted: #9fb0c0;
+      --accent: #f86860;
+      --border: rgba(255,255,255,.08);
+      --shadow: 0 10px 30px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      background: radial-gradient(1200px 700px at 10% 10%, rgba(248,104,96,.18), transparent 60%),
+                  radial-gradient(1000px 700px at 90% 20%, rgba(108,227,255,.10), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 24px; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(10px);
+      background: rgba(11,15,20,.75);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar { display:flex; gap:14px; align-items:center; justify-content:space-between; padding: 14px 24px; }
+    .brand { display:flex; align-items:center; gap:12px; }
+    .logo {
+      width: 42px; height: 42px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(248,104,96,1), rgba(248,104,96,.55));
+      box-shadow: 0 10px 25px rgba(248,104,96,.25);
+      display:grid; place-items:center;
+      font-weight: 900;
+    }
+    .titlebox h1 { margin:0; font-size: 16px; letter-spacing: .5px; }
+    .titlebox p { margin:0; font-size: 12px; color: var(--muted); }
+    .actions { display:flex; gap:10px; align-items:center; }
+    .search {
+      width: min(520px, 58vw);
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(16,24,38,.65);
+      color: var(--text);
+      outline: none;
+    }
+    .btn {
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(16,24,38,.65);
+      color: var(--text);
+      cursor: pointer;
+      display:flex; align-items:center; gap:8px;
+    }
+    .btn:hover { border-color: rgba(248,104,96,.45); }
+    .lang { display:flex; gap:8px; align-items:center; }
+    .chip {
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(16,24,38,.65);
+      cursor: pointer;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: .4px;
+    }
+    .chip.active {
+      color: var(--text);
+      border-color: rgba(248,104,96,.45);
+      box-shadow: 0 10px 25px rgba(248,104,96,.18);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 18px;
+      padding-top: 18px;
+    }
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: 1fr; }
+      .sidebar { position: relative; top: 0; }
+      .search { width: 56vw; }
+    }
+    .sidebar {
+      position: sticky; top: 98px; align-self: start;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(16,24,38,.55);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .sidebar .hd {
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(248,104,96,.10), transparent);
+    }
+    .sidebar .hd strong { display:block; }
+    .sidebar .hd span { color: var(--muted); font-size: 12px; }
+    .toc {
+      display:flex; flex-direction:column;
+      padding: 10px;
+      max-height: calc(100vh - 160px);
+      overflow:auto;
+    }
+    .toc-link {
+      padding: 10px 10px;
+      border-radius: 12px;
+      color: var(--muted);
+      border: 1px solid transparent;
+    }
+    .toc-link:hover {
+      color: var(--text);
+      border-color: rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+    }
+    main { display:flex; flex-direction:column; gap: 16px; }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(16,24,38,.55);
+      box-shadow: var(--shadow);
+      padding: 16px 16px;
+    }
+    .card h2 { margin: 0 0 10px; font-size: 18px; }
+    .card ul { margin: 0; padding-left: 18px; }
+    .card li { margin: 6px 0; color: #dbe7f3; }
+    .muted { color: var(--muted); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(15,23,36,.55);
+    }
+    th, td { padding: 10px 10px; border-bottom: 1px solid rgba(255,255,255,.06); text-align: left; }
+    th { font-size: 12px; color: var(--muted); font-weight: 700; letter-spacing:.4px; text-transform: uppercase; }
+    tr:hover td { background: rgba(255,255,255,.02); }
+    code { background: rgba(248,104,96,.12); padding: 2px 6px; border-radius: 8px; border: 1px solid rgba(248,104,96,.18); }
+    .pill { padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.03); }
+    .footer { padding: 18px 0 30px; color: var(--muted); font-size: 12px; text-align:center; }
+    .hide { display:none !important; }
+    .kbd { border:1px solid rgba(255,255,255,.12); padding: 2px 8px; border-radius: 10px; background: rgba(255,255,255,.03); }
+    *[data-lang]:not(html) { display:none; }
+    html[data-lang="en"] [data-lang="en"] { display: initial; }
+    html[data-lang="ro"] [data-lang="ro"] { display: initial; }
+    /* lists should be block when active */
+    html[data-lang="en"] ul[data-lang="en"] { display:block; }
+    html[data-lang="ro"] ul[data-lang="ro"] { display:block; }
+    html[data-lang="en"] span[data-lang="en"] { display:inline; }
+    html[data-lang="ro"] span[data-lang="ro"] { display:inline; }
+  </style>
+</head>
+<body>
+<noscript><div style="margin:16px; padding:12px; border:1px solid rgba(255,255,255,.12); border-radius:12px; background: rgba(16,24,38,.65); color:#e6edf3; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;">This page needs JavaScript for language switching (RO/EN) and search.</div></noscript>
+
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">ATS</div>
+      <div class="titlebox">
+        <h1>
+          <span data-lang="en">ATS MINI • Manual</span>
+          <span data-lang="ro">ATS MINI • Manual</span>
+        </h1>
+        <p class="muted">
+          <span data-lang="en">Quick search: press <span class="kbd">/</span> • ESC clears</span>
+          <span data-lang="ro">Cautare rapida: apasa <span class="kbd">/</span> • ESC sterge</span>
+        </p>
+      </div>
+    </div>
+    <div class="actions">
+      <input id="q" class="search" type="search"
+        data-ph-en="Search in manual (ex: Wi-Fi, RDS, Sleep, SNR, Memory)..."
+        data-ph-ro="Cauta in manual (ex: Wi-Fi, RDS, Sleep, SNR, Memory)..."
+        placeholder="Cauta in manual..." autocomplete="off" />
+      <div class="lang" title="Language">
+        <button class="chip" id="langRO">RO</button>
+        <button class="chip" id="langEN">EN</button>
+      </div>
+      <button class="btn" id="btnTop" title="Back to top / Sus">Sus</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="grid">
+    <aside class="sidebar">
+      <div class="hd">
+        <strong>
+          <span data-lang="en">Contents</span>
+          <span data-lang="ro">Cuprins</span>
+        </strong>
+        <span>
+          <span data-lang="en">Click a section to jump</span>
+          <span data-lang="ro">Click pe sectiune ca sa sari direct acolo</span>
+        </span>
+      </div>
+      <nav class="toc" id="toc">
+        <a class="toc-link" href="#sec-1"><span data-lang="en">Main screen</span><span data-lang="ro">Ecran principal</span></a><a class="toc-link" href="#sec-2"><span data-lang="en">Alternative UI</span><span data-lang="ro">Interfata alternativa</span></a><a class="toc-link" href="#sec-3"><span data-lang="en">Controls</span><span data-lang="ro">Comenzi</span></a><a class="toc-link" href="#sec-4"><span data-lang="en">Direct frequency input mode</span><span data-lang="ro">Mod introducere directa frecventa</span></a><a class="toc-link" href="#sec-5"><span data-lang="en">Menu</span><span data-lang="ro">Meniu</span></a><a class="toc-link" href="#sec-6"><span data-lang="en">Settings menu</span><span data-lang="ro">Meniu setari</span></a><a class="toc-link" href="#sec-7"><span data-lang="en">Wi-Fi</span><span data-lang="ro">Wi-Fi</span></a><a class="toc-link" href="#sec-8"><span data-lang="en">Schedule (EiBi)</span><span data-lang="ro">Program (EiBi)</span></a><a class="toc-link" href="#sec-9"><span data-lang="en">Reset</span><span data-lang="ro">Reset</span></a>
+        <a class="toc-link" href="#bands"><span data-lang="en">Bands table</span><span data-lang="ro">Tabel benzi</span></a>
+        <a class="toc-link" href="#serial"><span data-lang="en">Serial interface</span><span data-lang="ro">Interfata serial</span></a>
+        <a class="toc-link" href="#logfmt"><span data-lang="en">Log format</span><span data-lang="ro">Format log</span></a>
+      </nav>
+    </aside>
+
+    <main id="main">
+      <section class="card" data-searchable="true">
+        <h2><span data-lang="en">User Manual</span><span data-lang="ro">Manual utilizator</span></h2>
+        <p class="muted">
+          <span data-lang="en">Offline web manual for ATS MINI. Use the search bar to find any setting fast.</span>
+          <span data-lang="ro">Manual web (offline) pentru ATS MINI. Foloseste bara de cautare ca sa gasesti rapid orice setare.</span>
+        </p>
+      </section>
+
+      
+    <section id="sec-1" class="card" data-searchable="true">
+      <h2><span data-lang="en">Main screen</span><span data-lang="ro">Ecran principal</span></h2>
+      <ul data-lang="en"><li>RSSI meter (top left corner), also serves as a mono/stereo indicator in FM mode (one/two rows).</li>
+<li>Settings save icon (right after the RSSI meter). The settings are saved to non-volatile memory after 10 seconds of inactivity.</li>
+<li>Wi-Fi icon (top right area near the battery). Different colors indicate the connection status.</li>
+<li>Battery status (top right corner). It doesn’t show the voltage when charged. The only indication that the battery is charging is the hardware LED on the bottom of the receiver, which turns ON during charging.</li>
+<li>Band name and modulation (VHF &amp; FM, top center). See the Bands table for more details.</li>
+<li>Info panel (the box on the left side), also Menu. The parameters are explained in the Menu section.</li>
+<li>Frequency (center of the screen).</li>
+<li>FM station name (RDS PS) or frequency name (right below the frequency). Can also display current menu option using a bigger font when the Zoom Menu setting is enabled.</li>
+<li>Tuning scale (bottom of the screen). Can be replaced with additional RDS fields (RT, PTY) when extended RDS is enabled.</li></ul>
+      <ul data-lang="ro"><li>Indicator RSSI (colt stanga sus), serveste si ca indicator mono/stereo in modul FM (una/doua linii).</li>
+<li>Icon de salvare setari (imediat dupa RSSI). Setarile se salveaza in memoria non-volatila dupa 10 secunde de inactivitate.</li>
+<li>Icon Wi-Fi (sus dreapta, langa baterie). Culori diferite indica starea conexiunii.</li>
+<li>Stare baterie (colt dreapta sus). Nu afiseaza tensiunea cand e incarcata. Singurul semn ca se incarca este LED-ul hardware de jos, care se aprinde la incarcare.</li>
+<li>Numele benzii si modulatia (VHF &amp; FM, sus centru). Vezi tabelul Bands pentru detalii.</li>
+<li>Panoul Info (caseta din stanga), si Menu. Parametrii sunt explicati in sectiunea Menu.</li>
+<li>Frecventa (centrul ecranului).</li>
+<li>Nume post FM (RDS PS) sau nume frecventa (sub frecventa). Poate afisa si optiunea curenta de meniu cu font mai mare cand Zoom Menu este activ.</li>
+<li>Scala de acord (jos). Poate fi inlocuita cu campuri RDS suplimentare (RT, PTY) cand RDS extins este activ.</li></ul>
+    </section>
+    
+    <section id="sec-2" class="card" data-searchable="true">
+      <h2><span data-lang="en">Alternative UI</span><span data-lang="ro">Interfata alternativa</span></h2>
+      <ul data-lang="en"><li>Stereo indicator is on the right side of the band and mode (VHF &amp; FM).</li>
+<li>Tuning scale (right under the station name). Numbers on the left &amp; right sides are the band limits.</li>
+<li>S/N Meter (in dB). The range is 0…127 and the visual indicator linearly displays this range.</li>
+<li>RSSI &amp; S-Meter (number is in dBµV, meter is in S-points). Values below S4 on HF (rssi &lt; 4) and below S7 on VHF (rssi &lt; 2) are bogus; not precise and depends on antenna impedance.</li>
+<li>Both meters can be replaced with additional RDS fields (RT, PTY) when extended RDS is enabled.</li></ul>
+      <ul data-lang="ro"><li>Indicatorul Stereo este in partea dreapta a benzii si modului (VHF &amp; FM).</li>
+<li>Scala de acord (sub numele postului). Numerele din stanga/dreapta sunt limitele benzii.</li>
+<li>S/N Meter (in dB). Interval 0…127, iar bara afiseaza liniar acest interval.</li>
+<li>RSSI &amp; S-Meter (numarul in dBµV, bara in puncte S). Valorile sub S4 pe HF (rssi &lt; 4) si sub S7 pe VHF (rssi &lt; 2) sunt aproximative; depind de impedanta antenei.</li>
+<li>Ambele indicatoare pot fi inlocuite cu campuri RDS suplimentare (RT, PTY) cand RDS extins este activ.</li></ul>
+    </section>
+    
+    <section id="sec-3" class="card" data-searchable="true">
+      <h2><span data-lang="en">Controls</span><span data-lang="ro">Comenzi</span></h2>
+      <ul data-lang="en"><li>Rotate: Tunes frequency, navigates menu, adjusts parameters.</li>
+<li>Click (&lt;0.5 sec): Opens menu, selects.</li>
+<li>Short press (&gt;0.5 sec): Volume shortcut in VFO mode, context-dependent action in other modes.</li>
+<li>Long press (&gt;2 sec): Sleep on/off.</li>
+<li>Press and rotate: Direct frequency input mode, fine tuning in Seek mode.</li></ul>
+      <ul data-lang="ro"><li>Rotire: Acord frecventa, navigare meniu, ajustare parametri.</li>
+<li>Click (&lt;0.5 sec): Deschide meniu, selecteaza.</li>
+<li>Apasare scurta (&gt;0.5 sec): Shortcut volum in modul VFO, actiune dependenta de context in alte moduri.</li>
+<li>Apasare lunga (&gt;2 sec): Sleep on/off.</li>
+<li>Apasa si roteste: Mod introducere directa frecventa, acord fin in modul Seek.</li></ul>
+    </section>
+    
+    <section id="sec-4" class="card" data-searchable="true">
+      <h2><span data-lang="en">Direct frequency input mode</span><span data-lang="ro">Mod introducere directa frecventa</span></h2>
+      <ul data-lang="en"><li>Press and rotate the encoder to select the step (digit or “half-digit”).</li>
+<li>Rotate the encoder to adjust the frequency.</li>
+<li>Use short press to align frequency to the current step.</li>
+<li>To exit the mode, click the encoder or wait for a couple of seconds.</li></ul>
+      <ul data-lang="ro"><li>Apasa si roteste encoderul ca sa alegi pasul (cifra sau „jumatate de cifra”).</li>
+<li>Roteste encoderul ca sa ajustezi frecventa.</li>
+<li>Apasare scurta pentru aliniere la pasul curent.</li>
+<li>Iesi din mod prin click pe encoder sau asteapta cateva secunde.</li></ul>
+    </section>
+    
+    <section id="sec-5" class="card" data-searchable="true">
+      <h2><span data-lang="en">Menu</span><span data-lang="ro">Meniu</span></h2>
+      <ul data-lang="en"><li>Mode: FM (VHF only); LSB, USB, AM (other bands). NFM not supported due to SI4732 limitations.</li>
+<li>Band: List of Bands.</li>
+<li>Volume: 0…63. Short press to mute/unmute.</li>
+<li>Step: Tuning step (depends on band/mode).</li>
+<li>Seek: Seek up/down on AM/FM; normal tuning on LSB/USB. Rotate/click to stop seek. Short press switches seek/schedule. Press+rotate for fine tuning.</li>
+<li>Scan: Scan range and plot RSSI (S) and SNR (N) graphs (metrics mostly meaningless in SSB). Short press 0.5s to rescan; click/rotate to abort.</li>
+<li>Memory: 99 favorite slots. Short press empty slot to store current, short press to erase, rotate to switch, click to exit. Can edit via serial or web tool in Chrome.</li>
+<li>Squelch: Mute when RSSI below threshold (unlikely in SSB). Short press in Squelch menu to quickly turn off.</li>
+<li>Bandwidth: Channel filter bandwidth.</li>
+<li>AGC/ATTN: AGC on/off or attenuation (attenuator not applicable to SSB).</li>
+<li>AVC: Max gain for automatic volume control (not FM).</li>
+<li>SoftMute: Softmute max attenuation (AM/SSB).</li>
+<li>Settings: Settings submenu.</li></ul>
+      <ul data-lang="ro"><li>Mode: FM (doar VHF); LSB, USB, AM (alte benzi). NFM nu este suportat din cauza limitarilor SI4732.</li>
+<li>Band: Lista de benzi.</li>
+<li>Volume: 0…63. Apasare scurta pentru mute/unmute.</li>
+<li>Step: Pas acord (depinde de banda/mod).</li>
+<li>Seek: Cautare sus/jos pe AM/FM; acord normal pe LSB/USB. Rotire/click opreste seek. Apasare scurta comuta seek/schedule. Apasa+rotire pentru acord fin.</li>
+<li>Scan: Scaneaza un interval si deseneaza grafice RSSI (S) si SNR (N) (in SSB sunt in mare parte nerelevante). Apasare scurta 0.5s pentru rescan; click/rotire pentru abort.</li>
+<li>Memory: 99 sloturi favorite. Apasare scurta pe slot gol pentru salvare; apasare scurta pentru stergere; rotire pentru schimbare; click pentru iesire. Editare si prin serial sau web tool in Chrome.</li>
+<li>Squelch: Mute cand RSSI e sub prag (rar util in SSB). Apasare scurta in meniul Squelch pentru oprire rapida.</li>
+<li>Bandwidth: Latime banda filtru.</li>
+<li>AGC/ATTN: AGC on/off sau atenuare (atenuatorul nu se aplica in SSB).</li>
+<li>AVC: Castig maxim pentru control automat volum (nu in FM).</li>
+<li>SoftMute: Atenuare maxima softmute (AM/SSB).</li>
+<li>Settings: Submeniul de setari.</li></ul>
+    </section>
+    
+    <section id="sec-6" class="card" data-searchable="true">
+      <h2><span data-lang="en">Settings menu</span><span data-lang="ro">Meniu setari</span></h2>
+      <ul data-lang="en"><li>Brightness: 10…255 (battery draw ~80mA min, ~100mA default, ~120mA max).</li>
+<li>Calibration: SSB calibration offset (-2000…2000, per mode/band).</li>
+<li>RDS: PS/CT/RT/PTY/ALL (EU/US). Time may be UTC or local and can be bogus; clock sync happens once per power cycle.</li>
+<li>UTC Offset: Affects displayed time (RDS or NTP).</li>
+<li>FM Region: De-emphasis (50µs EU/JP/AU, 70µs US).</li>
+<li>Theme: Color theme.</li>
+<li>UI Layout: Alternative UI layouts (currently one alternative UI).</li>
+<li>Zoom Menu: Larger font for current menu item.</li>
+<li>Scroll Dir.: Menu scroll direction for clockwise encoder turn.</li>
+<li>Sleep: Auto sleep seconds (0 = disabled).</li>
+<li>Sleep Mode: Locked/Unlocked/CPU Sleep (power draw ranges).</li>
+<li>Load EiBi: Download EiBi schedule (needs Wi-Fi).</li>
+<li>Wi-Fi: Off/AP/AP+Connect/Connect/Sync Only.</li>
+<li>About: Help/Authors/System.</li></ul>
+      <ul data-lang="ro"><li>Brightness: 10…255 (consum ~80mA min, ~100mA default, ~120mA max).</li>
+<li>Calibration: Offset calibrare SSB (-2000…2000, per mod/banda).</li>
+<li>RDS: PS/CT/RT/PTY/ALL (EU/US). Timpul poate fi UTC sau local si poate fi gresit; sincronizarea ceasului se face o data pe ciclu de pornire.</li>
+<li>UTC Offset: Afecteaza ora afisata (RDS sau NTP).</li>
+<li>FM Region: De-emphasis (50µs EU/JP/AU, 70µs US).</li>
+<li>Theme: Tema culori.</li>
+<li>UI Layout: Layout-uri UI alternative (momentan o interfata alternativa).</li>
+<li>Zoom Menu: Font mai mare pentru elementul curent din meniu.</li>
+<li>Scroll Dir.: Directia de scroll pentru rotire in sens orar.</li>
+<li>Sleep: Secunde auto sleep (0 = dezactivat).</li>
+<li>Sleep Mode: Locked/Unlocked/CPU Sleep (consum diferit).</li>
+<li>Load EiBi: Descarca programul EiBi (necesita Wi-Fi).</li>
+<li>Wi-Fi: Off/AP/AP+Connect/Connect/Sync Only.</li>
+<li>About: Ajutor/Autori/Sistem.</li></ul>
+    </section>
+    
+    <section id="sec-7" class="card" data-searchable="true">
+      <h2><span data-lang="en">Wi-Fi</span><span data-lang="ro">Wi-Fi</span></h2>
+      <ul data-lang="en"><li>Used for: NTP time sync, download EiBi schedule, view status, view memory slots, manage settings.</li>
+<li>Modes: Off; AP Only (SSID ATS-Mini, web at http://10.1.1.1); AP+Connect; Connect; Sync Only.</li>
+<li>Initial config: enable AP Only → connect to ATS-Mini → open http://10.1.1.1 or atsmini.local → Config → set up to 3 APs → switch to AP+Connect/Connect and use new dynamic IP.</li>
+<li>Hint: use smartphone hotspot on the go.</li></ul>
+      <ul data-lang="ro"><li>Folosit pentru: sincronizare timp NTP, descarcare program EiBi, status, sloturi de memorie, administrare setari.</li>
+<li>Moduri: Off; AP Only (SSID ATS-Mini, web la http://10.1.1.1); AP+Connect; Connect; Sync Only.</li>
+<li>Configurare initiala: activeaza AP Only → conecteaza-te la ATS-Mini → deschide http://10.1.1.1 sau atsmini.local → Config → seteaza pana la 3 retele → treci pe AP+Connect/Connect si foloseste IP-ul dinamic nou.</li>
+<li>Sfat: foloseste hotspot-ul de pe telefon cand esti pe teren.</li></ul>
+    </section>
+    
+    <section id="sec-8" class="card" data-searchable="true">
+      <h2><span data-lang="en">Schedule (EiBi)</span><span data-lang="ro">Program (EiBi)</span></h2>
+      <ul data-lang="en"><li>Download once via Wi-Fi; stored in flash.</li>
+<li>Clock must be set (best: Sync Only via NTP in UTC; alternative: RDS CT).</li>
+<li>Shows currently broadcasting stations on specific frequencies (days of week ignored for now).</li>
+<li>Jump between stations using Seek mode (clock icon); short press encoder switches modes.</li></ul>
+      <ul data-lang="ro"><li>Se descarca o data prin Wi-Fi; se salveaza in flash.</li>
+<li>Ceasul trebuie setat (recomandat: Sync Only via NTP in UTC; alternativa: RDS CT).</li>
+<li>Arata posturile care emit acum pe anumite frecvente (zilele saptamanii sunt ignorate momentan).</li>
+<li>Sari intre posturi folosind modul Seek (icon ceas); apasare scurta comuta modurile.</li></ul>
+    </section>
+    
+    <section id="sec-9" class="card" data-searchable="true">
+      <h2><span data-lang="en">Reset</span><span data-lang="ro">Reset</span></h2>
+      <ul data-lang="en"><li>Switch off receiver.</li>
+<li>Press and hold encoder.</li>
+<li>Turn on receiver.</li>
+<li>Release after “Resetting Preferences” message appears.</li></ul>
+      <ul data-lang="ro"><li>Opreste receptorul.</li>
+<li>Apasa si tine encoderul apasat.</li>
+<li>Porneste receptorul.</li>
+<li>Elibereaza dupa ce apare mesajul „Resetting Preferences”.</li></ul>
+    </section>
+    
+
+      <section id="bands" class="card" data-searchable="true">
+        <h2><span data-lang="en">Bands table</span><span data-lang="ro">Tabel benzi</span></h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th><th>Min frequency</th><th>Max frequency</th><th>Default mode</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>VHF</td><td>64 MHz</td><td>108 MHz</td><td><span class='pill'>FM</span></td></tr>
+<tr><td>ALL</td><td>150 kHz</td><td>30000 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>11M</td><td>25600 kHz</td><td>26100 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>13M</td><td>21500 kHz</td><td>21900 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>15M</td><td>18900 kHz</td><td>19100 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>16M</td><td>17400 kHz</td><td>18100 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>19M</td><td>15100 kHz</td><td>15900 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>22M</td><td>13500 kHz</td><td>13900 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>25M</td><td>11000 kHz</td><td>13000 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>31M</td><td>9000 kHz</td><td>11000 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>41M</td><td>7000 kHz</td><td>9000 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>49M</td><td>5000 kHz</td><td>7000 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>60M</td><td>4000 kHz</td><td>5100 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>75M</td><td>3500 kHz</td><td>4000 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>90M</td><td>3000 kHz</td><td>3500 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>MW3</td><td>1700 kHz</td><td>3500 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>MW2</td><td>495 kHz</td><td>1701 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>MW1</td><td>150 kHz</td><td>1800 kHz</td><td><span class='pill'>AM</span></td></tr>
+<tr><td>160M</td><td>1800 kHz</td><td>2000 kHz</td><td><span class='pill'>LSB</span></td></tr>
+<tr><td>80M</td><td>3500 kHz</td><td>4000 kHz</td><td><span class='pill'>LSB</span></td></tr>
+<tr><td>40M</td><td>7000 kHz</td><td>7300 kHz</td><td><span class='pill'>LSB</span></td></tr>
+<tr><td>30M</td><td>10000 kHz</td><td>10200 kHz</td><td><span class='pill'>LSB</span></td></tr>
+<tr><td>20M</td><td>14000 kHz</td><td>14400 kHz</td><td><span class='pill'>USB</span></td></tr>
+<tr><td>17M</td><td>18000 kHz</td><td>18200 kHz</td><td><span class='pill'>USB</span></td></tr>
+<tr><td>15M</td><td>21000 kHz</td><td>21500 kHz</td><td><span class='pill'>USB</span></td></tr>
+<tr><td>12M</td><td>24800 kHz</td><td>25000 kHz</td><td><span class='pill'>USB</span></td></tr>
+<tr><td>10M</td><td>28000 kHz</td><td>29700 kHz</td><td><span class='pill'>USB</span></td></tr>
+<tr><td>CB</td><td>25000 kHz</td><td>28000 kHz</td><td><span class='pill'>AM</span></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="serial" class="card" data-searchable="true">
+        <h2><span data-lang="en">Serial interface</span><span data-lang="ro">Interfata serial</span></h2>
+        <p class="muted">
+          <span data-lang="en">Quick commands (PuTTY / Picocom / WebSerial). Typical serial settings: 115200 8N1 (sometimes 9600 8N1 is more stable).</span>
+          <span data-lang="ro">Comenzi rapide (PuTTY / Picocom / WebSerial). Setari serial uzuale: 115200 8N1 (uneori 9600 8N1 e mai stabil).</span>
+        </p>
+        <table>
+          <thead>
+            <tr><th>Button</th><th>Function</th><th>Comments</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>R</code></td><td>Rotate Encoder Up</td><td>Tune up / scroll menu</td></tr>
+<tr><td><code>r</code></td><td>Rotate Encoder Down</td><td>Tune down / scroll menu</td></tr>
+<tr><td><code>e</code></td><td>Encoder Button</td><td>Single push emulation (no reset/long press)</td></tr>
+<tr><td><code>V</code></td><td>Volume Up</td><td></td></tr>
+<tr><td><code>v</code></td><td>Volume Down</td><td></td></tr>
+<tr><td><code>B</code></td><td>Next Band</td><td></td></tr>
+<tr><td><code>b</code></td><td>Previous Band</td><td></td></tr>
+<tr><td><code>M</code></td><td>Next Mode</td><td>Next modulation</td></tr>
+<tr><td><code>m</code></td><td>Previous Mode</td><td>Previous modulation</td></tr>
+<tr><td><code>S</code></td><td>Next step</td><td></td></tr>
+<tr><td><code>s</code></td><td>Previous step</td><td></td></tr>
+<tr><td><code>W</code></td><td>Next Bandwidth</td><td></td></tr>
+<tr><td><code>w</code></td><td>Previous Bandwidth</td><td></td></tr>
+<tr><td><code>A</code></td><td>AGC/Att Up</td><td>AGC or attenuator up</td></tr>
+<tr><td><code>a</code></td><td>AGC/Att Down</td><td>AGC or attenuator down</td></tr>
+<tr><td><code>L</code></td><td>Backlight Up</td><td></td></tr>
+<tr><td><code>l</code></td><td>Backlight Down</td><td></td></tr>
+<tr><td><code>I</code></td><td>Calibration Up</td><td></td></tr>
+<tr><td><code>i</code></td><td>Calibration Down</td><td></td></tr>
+<tr><td><code>O</code></td><td>Sleep On</td><td></td></tr>
+<tr><td><code>o</code></td><td>Sleep Off</td><td></td></tr>
+<tr><td><code>t</code></td><td>Toggle Log</td><td>Receiver monitor (log) on/off</td></tr>
+<tr><td><code>C</code></td><td>Screenshot</td><td>Capture screenshot as BMP HEX</td></tr>
+<tr><td><code>$</code></td><td>Show Memory Slots</td><td>Format suitable for restore after reset</td></tr>
+<tr><td><code>#</code></td><td>Set Memory Slot</td><td>Example #01,VHF,107900000,FM (freq 0 clears)</td></tr>
+<tr><td><code>T</code></td><td>Theme Editor</td><td>Toggle theme editor</td></tr>
+<tr><td><code>@</code></td><td>Get Theme</td><td>Print current theme</td></tr>
+<tr><td><code>^</code></td><td>Set Theme</td><td>Set theme as list of HEX numbers (until power cycle)</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="logfmt" class="card" data-searchable="true">
+        <h2><span data-lang="en">Log format (monitor)</span><span data-lang="ro">Format log (monitor)</span></h2>
+        <p class="muted">
+          <span data-lang="en">When log mode is active, CSV fields are sent in the order below.</span>
+          <span data-lang="ro">Cand log mode e activ, se trimit campuri CSV in ordinea de mai jos.</span>
+        </p>
+        <table>
+          <thead>
+            <tr><th>Pos</th><th>Parameter</th><th>Function</th><th>Comments</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><code>APP_VERSION</code></td><td>F/W version</td><td>Example 201 → v2.01</td></tr>
+<tr><td>2</td><td><code>currentFrequency</code></td><td>Frequency</td><td>FM=10 kHz, AM/SSB=1 kHz</td></tr>
+<tr><td>3</td><td><code>currentBFO</code></td><td>BFO</td><td>SSB=Hz</td></tr>
+<tr><td>4</td><td><code>bandCal</code></td><td>BFO</td><td>SSB=Hz</td></tr>
+<tr><td>5</td><td><code>bandName</code></td><td>Band</td><td>See bands table</td></tr>
+<tr><td>6</td><td><code>currentMode</code></td><td>Mode</td><td>FM/LSB/USB/AM</td></tr>
+<tr><td>7</td><td><code>currentStepIdx</code></td><td>Step</td><td></td></tr>
+<tr><td>8</td><td><code>bandwidthIdx</code></td><td>Bandwidth</td><td></td></tr>
+<tr><td>9</td><td><code>agcIdx</code></td><td>AGC/Attn</td><td></td></tr>
+<tr><td>10</td><td><code>volume</code></td><td>Volume</td><td>0..63 (0=Mute)</td></tr>
+<tr><td>11</td><td><code>remoteRssi</code></td><td>RSSI</td><td>0..127 dBuV</td></tr>
+<tr><td>12</td><td><code>remoteSnr</code></td><td>SNR</td><td>0..127 dB</td></tr>
+<tr><td>13</td><td><code>tuningCapacitor</code></td><td>Antenna Capacitor</td><td>0..6143</td></tr>
+<tr><td>14</td><td><code>remoteVoltage</code></td><td>ADC average value</td><td>Voltage=Value×1.702/1000</td></tr>
+<tr><td>15</td><td><code>remoteSeqnum</code></td><td>Sequence number</td><td>0..255 repeating</td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top:10px;">
+          <span data-lang="en">In SSB: “Display” frequency (Hz) = (currentFrequency × 1000) + currentBFO</span>
+          <span data-lang="ro">In SSB: frecventa “Display” (Hz) = (currentFrequency x 1000) + currentBFO</span>
+        </p>
+      </section>
+
+      <div class="footer">
+        <span data-lang="en">Made for you. Want screenshots + full RO localization? Tell me.</span>
+        <span data-lang="ro">Facut pentru tine. Vrei capturi de ecran + localizare RO completa? Zi-mi.</span>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+(function() {
+  const q = document.getElementById('q');
+  const cards = Array.from(document.querySelectorAll('[data-searchable="true"]'));
+  const btnTop = document.getElementById('btnTop');
+  const langRO = document.getElementById('langRO');
+  const langEN = document.getElementById('langEN');
+
+  function norm(s) {
+    return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); 
+  }
+
+  function setLang(lang) {
+    document.documentElement.setAttribute('data-lang', lang);
+    localStorage.setItem('ats_lang', lang);
+    langRO.classList.toggle('active', lang === 'ro');
+    langEN.classList.toggle('active', lang === 'en');
+
+    // update placeholder
+    const ph = q.getAttribute(lang === 'en' ? 'data-ph-en' : 'data-ph-ro');
+    if (ph) q.setAttribute('placeholder', ph);
+
+    // clear search on language switch (optional but cleaner)
+    applyFilter();
+  }
+
+  function applyFilter() {
+    const needle = norm(q.value.trim());
+    if (!needle) {
+      cards.forEach(c => c.classList.remove('hide'));
+      return;
+    }
+    // filter only using currently visible language text
+    cards.forEach(c => {
+      const visible = c.querySelectorAll('[data-lang="' + document.documentElement.getAttribute('data-lang') + '"]');
+      let text = '';
+      visible.forEach(n => text += '\n' + (n.innerText || ''));
+      c.classList.toggle('hide', !norm(text).includes(needle));
+    });
+  }
+
+  q.addEventListener('input', applyFilter);
+
+  // Focus search with /
+  window.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== q) {
+      e.preventDefault();
+      q.focus();
+    }
+    if (e.key === 'Escape' && document.activeElement === q) {
+      q.value = '';
+      applyFilter();
+      q.blur();
+    }
+  });
+
+  btnTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  langRO.addEventListener('click', () => setLang('ro'));
+  langEN.addEventListener('click', () => setLang('en'));
+
+  // init lang
+  const saved = localStorage.getItem('ats_lang');
+  setLang(saved === 'en' ? 'en' : 'ro');
+})();
+</script>
+</body>
+</html>
