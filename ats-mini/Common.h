@@ -5,14 +5,14 @@
 #include <TFT_eSPI.h>
 #include <SI4735-fixed.h>
 
-#define RECEIVER_DESC  "ESP32-SI4732 Receiver"
+#define RECEIVER_DESC  "Receptor ESP32-SI4732"
 #define RECEIVER_NAME  "ATS-Mini"
 #define FIRMWARE_URL   "https://github.com/neurici/ats-mini"
 #define MANUAL_URL     "https://github.com/neurici/ats-mini/manual.html"
-#define AUTHORS_LINE1  "Authors: GERSIU (COGIAN SERGIU),"
-#define AUTHORS_LINE2  "Volos Projects, Ralph Xavier, Sunnygold,"
-#define AUTHORS_LINE3  "Goshante, G8PTN (Dave), R9UCL (Max Arnold),"
-#define AUTHORS_LINE4  "Marat Fayzullin"
+#define AUTHORS_LINE1  "Autor: GERSIU (COGIAN SERGIU),"
+#define AUTHORS_LINE2  "https://formatech3d.ro"
+#define AUTHORS_LINE3  "https://facebook.com/neurici"
+#define AUTHORS_LINE4  "neurici@gmail.com"
 
 #define VER_APP        233  // Firmware version
 #define VER_SETTINGS   71   // Settings version
