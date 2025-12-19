@@ -232,8 +232,8 @@ static bool wifiInitAP()
   WiFi.softAPConfig(ip, gateway, subnet);
 
   drawScreen(
-    ("Use Access Point " + String(apSSID)).c_str(),
-    ("IP : " + WiFi.softAPIP().toString() + " or atsmini.local").c_str()
+    ("Foloseste punct access " + String(apSSID)).c_str(),
+    ("IP : " + WiFi.softAPIP().toString() + " sau atsmini.local").c_str()
   );
 
   ajaxInterval = 2500;
@@ -245,7 +245,7 @@ static bool wifiInitAP()
 //
 static bool wifiConnect()
 {
-  String status = "Connecting to WiFi network...";
+  String status = "Conectare la reteaua WiFi...";
 
   // Clean credentials
   wifiMulti.APlistClean();
@@ -286,8 +286,8 @@ static bool wifiConnect()
   {
     // WiFi connection succeeded
     drawScreen(
-      ("Connected to WiFi network (" + WiFi.SSID() + ")").c_str(),
-      ("IP : " + WiFi.localIP().toString() + " or atsmini.local").c_str()
+      ("Conectat la reteaua WiFi (" + WiFi.SSID() + ")").c_str(),
+      ("IP : " + WiFi.localIP().toString() + " sau atsmini.local").c_str()
     );
     // Done
     ajaxInterval = 1000;
@@ -471,7 +471,7 @@ static const String webPage(const String &body)
 "<HEAD>"
   "<META CHARSET='UTF-8'>"
   "<META NAME='viewport' CONTENT='width=device-width, initial-scale=1.0'>"
-  "<TITLE>ATS-Mini Config</TITLE>"
+  "<TITLE>ATS-Mini Configurare</TITLE>"
   "<STYLE>" + webStyleSheet() + "</STYLE>"
 "</HEAD>"
 "<BODY STYLE='font-family: sans-serif;'>" + body + "</BODY>"
@@ -538,17 +538,17 @@ static const String webRadioPage()
   }
 
   return webPage(
-"<H1>ATS-Mini Pocket Receiver - Gersiu Edition</H1>"
+"<H1>Receptor multi-bandă ATS-Mini - Gersiu Edition</H1>"
 "<P ALIGN='CENTER'>"
-  "<A HREF='/memory'>Memory</A>&nbsp;|&nbsp;<A HREF='/config'>Config</A>"
+  "<A HREF='/memory'>Memory</A>&nbsp;|&nbsp;<A HREF='/config'>Configurare</A>"
 "</P>"
 "<TABLE COLUMNS=2>"
 "<TR>"
-  "<TD CLASS='LABEL'>IP Address</TD>"
+  "<TD CLASS='LABEL'>Adresă IP</TD>"
   "<TD><A HREF='http://" + ip + "'>" + ip + "</A> (" + ssid + ")</TD>"
 "</TR>"
 "<TR>"
-  "<TD CLASS='LABEL'>MAC Address</TD>"
+  "<TD CLASS='LABEL'>Adresă MAC</TD>"
   "<TD>" + String(getMACAddress()) + "</TD>"
 "</TR>"
 "<TR>"
@@ -556,23 +556,23 @@ static const String webRadioPage()
   "<TD>" + String(getVersion(true)) + "</TD>"
 "</TR>"
 "<TR>"
-  "<TD CLASS='LABEL'>Band</TD>"
+  "<TD CLASS='LABEL'>Bandă</TD>"
   "<TD>" + String(getCurrentBand()->bandName) + "</TD>"
 "</TR>"
 "<TR>"
-  "<TD CLASS='LABEL'>Frequency</TD>"
+  "<TD CLASS='LABEL'>Frecvență</TD>"
   "<TD>" + freq + String(bandModeDesc[currentMode]) + "</TD>"
 "</TR>"
 "<TR>"
-  "<TD CLASS='LABEL'>Signal Strength</TD>"
+  "<TD CLASS='LABEL'>Putere Semnal</TD>"
   "<TD>" + String(rssi) + "dBuV</TD>"
 "</TR>"
 "<TR>"
-  "<TD CLASS='LABEL'>Signal to Noise</TD>"
+  "<TD CLASS='LABEL'>Raport semnal-zgomot</TD>"
   "<TD>" + String(snr) + "dB</TD>"
 "</TR>"
 "<TR>"
-  "<TD CLASS='LABEL'>Battery Voltage</TD>"
+  "<TD CLASS='LABEL'>Voltaj Baterie</TD>"
   "<TD>" + String(batteryMonitor()) + "V</TD>"
 "</TR>"
 "</TABLE>"
@@ -601,9 +601,9 @@ static const String webMemoryPage()
   }
 
   return webPage(
-"<H1>ATS-Mini Pocket Receiver Memory</H1>"
+"<H1>Receptor multi-bandă ATS-Mini - Memorie Canale</H1>"
 "<P ALIGN='CENTER'>"
-  "<A HREF='/'>Status</A>&nbsp;|&nbsp;<A HREF='/config'>Config</A>"
+  "<A HREF='/'>Status</A>&nbsp;|&nbsp;<A HREF='/config'>Configurare</A>"
 "</P>"
 "<TABLE COLUMNS=2>" + items + "</TABLE>"
 );
@@ -624,71 +624,71 @@ const String webConfigPage()
 "<H1>ATS-Mini Config</H1>"
 "<P ALIGN='CENTER'>"
   "<A HREF='/'>Status</A>"
-  "&nbsp;|&nbsp;<A HREF='/memory'>Memory</A>"
+  "&nbsp;|&nbsp;<A HREF='/memory'>Memorie</A>"
 "</P>"
 "<FORM ACTION='/setconfig' METHOD='POST'>"
   "<TABLE COLUMNS=2>"
-  "<TR><TH COLSPAN=2 CLASS='HEADING'>WiFi Network 1</TH></TR>"
+  "<TR><TH COLSPAN=2 CLASS='HEADING'>Rețea WiFi 1</TH></TR>"
   "<TR>"
     "<TD CLASS='LABEL'>SSID</TD>"
     "<TD>" + webInputField("wifissid1", ssid1) + "</TD>"
   "</TR>"
   "<TR>"
-    "<TD CLASS='LABEL'>Password</TD>"
+    "<TD CLASS='LABEL'>Parola</TD>"
     "<TD>" + webInputField("wifipass1", pass1, true) + "</TD>"
   "</TR>"
-  "<TR><TH COLSPAN=2 CLASS='HEADING'>WiFi Network 2</TH></TR>"
+  "<TR><TH COLSPAN=2 CLASS='HEADING'Rețea WiFi 2</TH></TR>"
   "<TR>"
     "<TD CLASS='LABEL'>SSID</TD>"
     "<TD>" + webInputField("wifissid2", ssid2) + "</TD>"
   "</TR>"
   "<TR>"
-    "<TD CLASS='LABEL'>Password</TD>"
+    "<TD CLASS='LABEL'>Parola</TD>"
     "<TD>" + webInputField("wifipass2", pass2, true) + "</TD>"
   "</TR>"
-  "<TR><TH COLSPAN=2 CLASS='HEADING'>WiFi Network 3</TH></TR>"
+  "<TR><TH COLSPAN=2 CLASS='HEADING'>Rețea WiFi 3</TH></TR>"
   "<TR>"
     "<TD CLASS='LABEL'>SSID</TD>"
     "<TD>" + webInputField("wifissid3", ssid3) + "</TD>"
   "</TR>"
   "<TR>"
-    "<TD CLASS='LABEL'>Password</TD>"
+    "<TD CLASS='LABEL'>Parola</TD>"
     "<TD>" + webInputField("wifipass3", pass3, true) + "</TD>"
   "</TR>"
-  "<TR><TH COLSPAN=2 CLASS='HEADING'>This Web UI Login Credentials</TH></TR>"
+  "<TR><TH COLSPAN=2 CLASS='HEADING'>Credențiale de conectare la interfața web</TH></TR>"
   "<TR>"
-    "<TD CLASS='LABEL'>Username</TD>"
+    "<TD CLASS='LABEL'>Utilizator</TD>"
     "<TD>" + webInputField("username", loginUsername) + "</TD>"
   "</TR>"
   "<TR>"
-    "<TD CLASS='LABEL'>Password</TD>"
+    "<TD CLASS='LABEL'>Parola</TD>"
     "<TD>" + webInputField("password", loginPassword, true) + "</TD>"
   "</TR>"
-  "<TR><TH COLSPAN=2 CLASS='HEADING'>Settings</TH></TR>"
+  "<TR><TH COLSPAN=2 CLASS='HEADING'>Setări</TH></TR>"
   "<TR>"
-    "<TD CLASS='LABEL'>Time Zone</TD>"
+    "<TD CLASS='LABEL'>Fus Orar</TD>"
     "<TD>"
       "<SELECT NAME='utcoffset'>" + webUtcOffsetSelector() + "</SELECT>"
     "</TD>"
   "</TR>"
   "<TR>"
-    "<TD CLASS='LABEL'>Theme</TD>"
+    "<TD CLASS='LABEL'>Temă</TD>"
     "<TD>"
       "<SELECT NAME='theme'>" + webThemeSelector() + "</SELECT>"
     "</TD>"
   "</TR>"
   "<TR>"
-    "<TD CLASS='LABEL'>Reverse Scrolling</TD>"
+    "<TD CLASS='LABEL'>Derulare inversă</TD>"
     "<TD><INPUT TYPE='CHECKBOX' NAME='scroll' VALUE='on'" +
     (scrollDirection<0? " CHECKED ":"") + "></TD>"
   "</TR>"
    "<TR>"
-    "<TD CLASS='LABEL'>Zoomed Menu</TD>"
+    "<TD CLASS='LABEL'>Meniu Mărit</TD>"
     "<TD><INPUT TYPE='CHECKBOX' NAME='zoom' VALUE='on'" +
     (zoomMenu? " CHECKED ":"") + "></TD>"
   "</TR>"
   "<TR><TH COLSPAN=2 CLASS='HEADING'>"
-    "<INPUT TYPE='SUBMIT' VALUE='Save'>"
+    "<INPUT TYPE='SUBMIT' VALUE='Salvare'>"
   "</TH></TR>"
   "</TABLE>"
 "</FORM>"
