@@ -48,7 +48,7 @@ void drawAboutHelp(uint8_t arrow)
   if(arrow)
   {
     spr.drawString("ATS MINI - GERSIU EDITION", 130, 70 + 16 * 3, 2);
-    spr.drawString("COGIAN SERGIU", 130, 70 + 16 * 4, 2);
+    spr.drawString("MADE BY COGIAN SERGIU", 130, 70 + 16 * 4, 2);
   }
   else
   {
