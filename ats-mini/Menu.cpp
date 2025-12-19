@@ -92,14 +92,14 @@ int8_t menuIdx = MENU_VOLUME;
 static const char *menu[] =
 {
   "Mod",
-  "Banda",
+  "Bandă",
   "Volum",
   "Pas",
-  "Seek",
+  "Cautare",
   "Scanare",
   "Memorie",
   "Squelch",
-  "Bandwidth",
+  "L Bandă",
   "AGC/ATTN",
   "AVC",
   "SoftMute",
@@ -139,8 +139,8 @@ static const char *settings[] =
   "Regiune FM",
   "Tema",
   "Apect UI",
-  "Marire MEniu",
-  "Directie Scroll",
+  "Marire Meniu",
+  "Dir. Scroll",
   "Somn",
   "Mod Somn",
   "Incarcare EiBi",
@@ -191,10 +191,10 @@ static const RDSMode rdsMode[] =
   { RDS_PS | RDS_CT, "PS+CT" },
   { RDS_PS | RDS_PI, "PS+PI" },
   { RDS_PS | RDS_PI | RDS_CT, "PS+PI+CT" },
-  { RDS_PS | RDS_PI | RDS_RT | RDS_PT, "ALL-CT (EU)" },
-  { RDS_PS | RDS_PI | RDS_RT | RDS_PT | RDS_RBDS, "ALL-CT (US)" },
-  { RDS_PS | RDS_PI | RDS_RT | RDS_PT | RDS_CT, "ALL (EU)" },
-  { RDS_PS | RDS_PI | RDS_RT | RDS_PT | RDS_CT | RDS_RBDS, "ALL (US)" },
+  { RDS_PS | RDS_PI | RDS_RT | RDS_PT, "TOT-CT (EU)" },
+  { RDS_PS | RDS_PI | RDS_RT | RDS_PT | RDS_RBDS, "TOT-CT (US)" },
+  { RDS_PS | RDS_PI | RDS_RT | RDS_PT | RDS_CT, "TOT (EU)" },
+  { RDS_PS | RDS_PI | RDS_RT | RDS_PT | RDS_CT | RDS_RBDS, "TOT (US)" },
 };
 
 uint8_t getRDSMode() { return(rdsMode[rdsModeIdx].mode); }
@@ -205,7 +205,7 @@ uint8_t getRDSMode() { return(rdsMode[rdsModeIdx].mode); }
 
 uint8_t sleepModeIdx = SLEEP_LOCKED;
 static const char *sleepModeDesc[] =
-{ "Locked", "Unlocked", "CPU Sleep" };
+{ "Blocat", "Deblocat", "Repaus CPU" };
 
 //
 // UTC Offset Menu
@@ -244,7 +244,7 @@ int getTotalUTCOffsets() { return(ITEM_COUNT(utcOffsets)); }
 //
 uint8_t uiLayoutIdx = 0;
 static const char *uiLayoutDesc[] =
-{ "Default", "S-Meter" };
+{ "Implicit", "Nivel Semnal" };
 
 //
 // USB Serial Mode Menu
@@ -252,7 +252,7 @@ static const char *uiLayoutDesc[] =
 
 uint8_t serialModeIdx = SERIAL_OFF;
 static const char *serialModeDesc[] =
-{ "Off", "Ad hoc" };
+{ "Oprit", "Pornit" };
 
 int getTotalSerialModes() { return(ITEM_COUNT(serialModeDesc)); }
 
@@ -262,7 +262,7 @@ int getTotalSerialModes() { return(ITEM_COUNT(serialModeDesc)); }
 
 uint8_t bleModeIdx = BLE_OFF;
 static const char *bleModeDesc[] =
-{ "Off", "Ad hoc" };
+{ "Oprit", "Pornit" };
 
 int getTotalBleModes() { return(ITEM_COUNT(bleModeDesc)); }
 
@@ -272,7 +272,7 @@ int getTotalBleModes() { return(ITEM_COUNT(bleModeDesc)); }
 
 uint8_t wifiModeIdx = NET_OFF;
 static const char *wifiModeDesc[] =
-{ "Off", "AP Only", "AP+Connect", "Connect", "Sync Only" };
+{ "Oprit", "Doar AP", "AP+Conectare", "Conectare", "Sincronizare" };
 
 //
 // Step Menu
@@ -1470,7 +1470,7 @@ static void drawSoftMuteMaxAtt(int x, int y, int sx)
   spr.setTextDatum(MC_DATUM);
 
   spr.setTextColor(TH.menu_param);
-  spr.drawString("Max Attn", 40+x+(sx/2), 32+y, 2);
+  spr.drawString("Attn Max", 40+x+(sx/2), 32+y, 2);
   spr.drawNumber(softMuteMaxAttIdx, 40+x+(sx/2), 60+y, 4);
   spr.drawString("dB", 40+x+(sx/2), 90+y, 4);
 }
@@ -1505,7 +1505,7 @@ static void drawAvc(int x, int y, int sx)
   spr.setTextDatum(MC_DATUM);
 
   spr.setTextColor(TH.menu_param);
-  spr.drawString("Max Gain", 40+x+(sx/2), 32+y, 2);
+  spr.drawString("Gain Max", 40+x+(sx/2), 32+y, 2);
 
   // Only show AVC for AM and SSB modes
   if(currentMode!=FM)
@@ -1592,7 +1592,7 @@ static void drawInfo(int x, int y, int sx)
   spr.fillSmoothRoundRect(1+x, 1+y, 76+sx, 110, 4, TH.box_border);
   spr.fillSmoothRoundRect(2+x, 2+y, 74+sx, 108, 4, TH.box_bg);
 
-  spr.drawString("Step:", 6+x, 64+y+(-3*16), 2);
+  spr.drawString("Pas:", 6+x, 64+y+(-3*16), 2);
   spr.drawString(getCurrentStep()->desc, 48+x, 64+y+(-3*16), 2);
 
   spr.drawString("BW:", 6+x, 64+y+(-2*16), 2);
@@ -1601,7 +1601,7 @@ static void drawInfo(int x, int y, int sx)
   if(!agcNdx && !agcIdx)
   {
     spr.drawString("AGC:", 6+x, 64+y+(-1*16), 2);
-    spr.drawString("On", 48+x, 64+y+(-1*16), 2);
+    spr.drawString("Pornit", 48+x, 64+y+(-1*16), 2);
   }
   else
   {
@@ -1634,7 +1634,7 @@ static void drawInfo(int x, int y, int sx)
   }
   else
   {
-    spr.drawString("AVC:", 6+x, 64+y + (1*16), 2);
+    spr.drawString("CVA:", 6+x, 64+y + (1*16), 2);
 
     if(currentMode==FM)
       sprintf(text, "n/a");
@@ -1649,7 +1649,7 @@ static void drawInfo(int x, int y, int sx)
   // Draw current time
   if(clockGet())
   {
-    spr.drawString("Time:", 6+x, 64+y+(2*16), 2);
+    spr.drawString("ORA:", 6+x, 64+y+(2*16), 2);
     spr.drawString(clockGet(), 48+x, 64+y+(2*16), 2);
   }
 }
