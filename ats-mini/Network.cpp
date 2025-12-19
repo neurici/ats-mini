@@ -278,7 +278,7 @@ static bool wifiConnect()
   if (wifiMulti.run() != WL_CONNECTED)
   {
     // WiFi connection failed
-    drawScreen(status.c_str(), "No WiFi connection");
+    drawScreen(status.c_str(), "Fara conexiune WiFi");
     // Done
     return(false);
   }
