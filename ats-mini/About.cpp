@@ -41,10 +41,10 @@ void drawAboutHelp(uint8_t arrow)
   esp_qrcode_config_t qrcode_config = ESP_QRCODE_CONFIG_DEFAULT();
   qrcode_config.display_func = displayQRCode;
   esp_qrcode_generate(&qrcode_config, MANUAL_URL);
-  spr.drawString("Scan the QR code to read", 130, 70 + 16 * -1, 2);
-  spr.drawString("the User Manual.", 130, 70 + 16 * 0, 2);
-  spr.drawString("Click the encoder button", 130, 70 + 16 * 1, 2);
-  spr.drawString("to continue.", 130, 70 + 16 * 2, 2);
+  spr.drawString("Scanare cod QR pentru a citi", 130, 70 + 16 * -1, 2);
+  spr.drawString("manualul de utilizare.", 130, 70 + 16 * 0, 2);
+  spr.drawString("Click pe buton", 130, 70 + 16 * 1, 2);
+  spr.drawString("pentru a continua.", 130, 70 + 16 * 2, 2);
   if(arrow)
   {
     spr.drawString("ATS MINI - GERSIU EDITION", 130, 70 + 16 * 3, 2);
@@ -52,8 +52,8 @@ void drawAboutHelp(uint8_t arrow)
   }
   else
   {
-    spr.drawString("To see this screen again,", 130, 70 + 16 * 4, 2);
-    spr.drawString("go to Menu->Settings->About.", 130, 70 + 16 * 5, 2);
+    spr.drawString("Pentru acest ecran,", 130, 70 + 16 * 4, 2);
+    spr.drawString("intra in Meniu->Setari->Despre.", 130, 70 + 16 * 5, 2);
   }
   spr.pushSprite(0, 0);
 }
